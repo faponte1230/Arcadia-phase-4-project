@@ -1,3 +1,6 @@
 class ArcadeSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name ,:num_of_games, :img_url
+  
+  has_many :reviews
+  has_many :users, through: :reviews
 end
