@@ -13,7 +13,7 @@ class ArcadesController < ApplicationController
 
   def show
     arcade = Arcade.find(params[:id])
-    render json: arcade
+    render json: arcade, status: :ok
   end
 
   private
@@ -21,4 +21,5 @@ class ArcadesController < ApplicationController
   def arcade_params
     params.permit(:name, :num_of_games, :img_url)
   end
+
 end
