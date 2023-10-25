@@ -22,4 +22,9 @@ arc1 = Arcade.create(name: "Barcade", num_of_games: 25, img_url: "https://parkne
 arc2 = Arcade.create(name: "Bowlero", num_of_games: 10, img_url: "https://addisontexas.net/sites/default/files/imageattachments/busdir/8361/bowlero.png")
 arc3 = Arcade.create(name: "Dave'n'Busters", num_of_games: 50, img_url: "https://live.staticflickr.com/2904/14110169303_98984fc612_b.jpg")
 
+#Review
+Review.create(user_id: a.id, arcade_id: arc1.id, body: "Love this place!")
+Review.create(user_id: b.id, arcade_id: arc2.id, body: "Not really many games, its more for bowling.")
+Review.create(user_id: c.id, arcade_id: arc3.id, body: "Not bad..the food is pricey.")
+
 puts("Data Loaded!!!")

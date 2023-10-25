@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def current_user
-    @current_user ||= User.find_by(session[:user_id]) #memoization
+    @current_user ||= User.find_by(id: session[:user_id]) #memoization
   end
 
   private
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_not_found
-    render json: {error: "Not found"}, status: :render_not_found
+    render json: {error: "Not found"}, status: :not_found
   end
 
   def render_unprocessable_entity(invalid)

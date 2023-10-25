@@ -1,5 +1,5 @@
 class ArcadesController < ApplicationController
-  before_action :authorize, only: [index]
+  before_action :authorize, only: [:index]
 
   def create
     arcade = Arcade.create!(arcade_params)
