@@ -7,12 +7,13 @@ class ArcadesController < ApplicationController
   end
 
   def index
-    arcades = Arcade.all 
-    render json: arcades, status: :ok
+    
+    arcades = Arcade.all  
+    render json: arcades
   end
 
   def show
-    arcade = Arcade.find(params[:id])
+    arcade = Arcade.find_by(id: params[:id])
     render json: arcade, status: :ok
   end
 

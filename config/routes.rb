@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   #Log in/out routes
   post '/login', to: "sessions#create"
-  delete 'logout', to: "sessions#destroy"
+  delete '/logout', to: "sessions#destroy"
 
   #Create & Read route for User
   get '/me', to: "users#show"
