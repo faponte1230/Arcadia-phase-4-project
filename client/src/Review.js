@@ -1,8 +1,18 @@
 import React from "react";
 
-function Review(){
+function Review({arc, rev}){
+
     return(
-        <div></div>
+        <div className="container">
+            <ul className="comment-author">
+                {rev.username}
+            </ul>
+            <ul>
+                {rev.body}
+            </ul>
+
+            <p>add CRUD</p>
+        </div>
     )
 }
 

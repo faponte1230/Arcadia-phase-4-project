@@ -1,4 +1,6 @@
 import { React, useState} from "react";
+import ReviewContainer from "./ReviewContainer";
+
 
 function ArcadeCard({arc}){
 
@@ -11,7 +13,7 @@ function ArcadeCard({arc}){
             <p className="t">Number of Games: {arc.num_of_games}</p>
             <button onClick={() =>setReviewBtn(!reviewBtn)}> { reviewBtn ? "Hide Reviews": "Add or Show Reviews"}</button>
 
-            {reviewBtn? <ReviewCard arc={arc} arc_reviews={arc.reviews} /> : null}
+            {reviewBtn? <ReviewContainer arc={arc} arc_reviews={arc.reviews} /> : null}
         </div>
     )
 }
