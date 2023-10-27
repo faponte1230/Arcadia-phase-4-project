@@ -1,8 +1,18 @@
 import React from "react";
+import ArcadeCard from "./ArcadeCard";
 
-function ArcadeList(){
+function ArcadeList({arcades}){
+
+    let displayArcadeCards= arcades.map( arc => {
+        return(
+           <ArcadeCard key={arc.id} arc={arc}/>
+        )
+    })
+
     return(
-        <div></div>
+        <div>
+            {displayArcadeCards}
+        </div>
     )
 }
 

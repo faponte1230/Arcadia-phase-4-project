@@ -1,15 +1,14 @@
 class ArcadesController < ApplicationController
-  before_action :authorize, only: [:index]
+  skip_before_action :authorize, only: [:index, :show]
+
+  def index
+    arcades = Arcade.all  
+    render json: arcades
+  end
 
   def create
     arcade = Arcade.create!(arcade_params)
     render json: arcade, status: :created
-  end
-
-  def index
-    
-    arcades = Arcade.all  
-    render json: arcades
   end
 
   def show
