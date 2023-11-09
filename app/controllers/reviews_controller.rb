@@ -7,28 +7,32 @@ class ReviewsController < ApplicationController
     end
 
     def show
-        review = Review.find(params[:id])
+        review = find_user_review
         render json: review
     end
 
     def create
-        review = @current_user.reviews.create!(review_params)
+        review = @current_user.reviews.create(review_params)
         render json: review, status: :created
     end
 
     def update
-        review = @current_user.reviews.find(params[:id])
-        review.update!(review_params)
+        review = find_user_review
+        review.update(review_params)
         render json: review
     end
 
     def destroy
-        review = @current_user.reviews.find(params[:id])
+        review = find_user_review
         review.destroy
         head :no_content
     end
 
     private
+    
+    def find_user_review
+        @current_user.reviews.find(params[:id])
+    end
     
     def review_params
         params.permit(:body, :arcade_id)

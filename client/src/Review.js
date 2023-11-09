@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useContext, useState} from "react";
+import { UserContext } from "./Context/user";
+import UpdateRevForm from "./UpdateRevForm";
 
-function Review({arc, rev}){
+function Review({rev, del, update}){
 
+    const [updateRevBtn, setUpdateRevBtn] = useState(false)
+    
+    const {user} = useContext(UserContext)
+
+    function handleDelete(){
+        fetch(`/reviews/${rev.id}`, {
+            method: "DELETE" ,
+        })
+        del(rev)
+        console.log(user)
+    }
+    
+    //delete function here? or parent..
     return(
         <div className="container">
             <ul className="comment-author">
@@ -10,8 +25,13 @@ function Review({arc, rev}){
             <ul>
                 {rev.body}
             </ul>
-
-            <p>add CRUD</p>
+            {rev.user_id === user.id ? <button className="button"onClick={(e) => setUpdateRevBtn(!updateRevBtn)}> { updateRevBtn ? "Cancel": "Update review" }</button>
+            : null}
+            {updateRevBtn? <UpdateRevForm rev={rev} update={update} setBtn={setUpdateRevBtn}/> : null}
+            <br/>
+            {rev.user_id === user.id ? <button className="button"onClick={handleDelete}> Delete review </button>
+            : null}
+        
         </div>
     )
 }

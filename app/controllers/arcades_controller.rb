@@ -7,7 +7,7 @@ class ArcadesController < ApplicationController
   end
 
   def create
-    arcade = Arcade.create!(arcade_params)
+    arcade = Arcade.create(arcade_params)
     render json: arcade, status: :created
   end
 

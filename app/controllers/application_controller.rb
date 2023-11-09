@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :authorize
+ 
   include ActionController::Cookies
   
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
   private
 
   def authorize 
-    render json: {error: "Not authorized"}, status: :unauthorized unless current_user
+    return render json: {error: "Not authorized"}, status: :unauthorized unless current_user
   end
 
   def render_not_found
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_unprocessable_entity(invalid)
-    render json: {error: invalid.record.errors}, status: :unprocessable_entity 
+    render json: { errors: invalid.record.errors}, status: :unprocessable_entity 
   end
 
 end

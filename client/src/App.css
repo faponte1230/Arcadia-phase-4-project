@@ -48,6 +48,7 @@
 
 .container {
   box-shadow: 0 4px 8px 0 rgba(9, 23, 223, 0.2);
+  background-color: rgb(137, 130, 208);
   transition: 0.3s;
   border-radius: 12px;
   font-size: 15px;
