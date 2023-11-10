@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+//import { useContext } from "react";
+//import { UserContext } from "./Context/user";
 
 function ReviewForm({arc, addReview, setBtn}){
 
@@ -7,8 +8,7 @@ function ReviewForm({arc, addReview, setBtn}){
     const [errors, setErrors] = useState([])
 
     
-    // we added the setUser state right at the end of this project, it goes along with the code marked below in green, identified as #combonumber7fromMacDonals
-    //const {user, setUser} = useContext(UserContext)
+   // const {revContext} = useContext(UserContext)
     
     function handleSubmit(e) {
         e.preventDefault();
@@ -18,13 +18,14 @@ function ReviewForm({arc, addReview, setBtn}){
                 "Content-Type" : "application/json",
             },
             body: JSON.stringify({
-                body: body,   //<--- body is an the current review you are typing from the input
-                arcade_id: arc.id   //< --- we want to send the cake_id to the backend too.
-            }),                    // remember, to create a review in the backend you need cake_id, review, and user_id. user_id is already stored in sessions so no need to include it.
+                body: body,  
+                arcade_id: arc.id  
+            }),                   
         })
         .then((res) => {
             if (res.ok){
                 res.json().then((rev) => {
+                    //revContext(rev)
                     addReview(rev)
                     console.log(rev)
                     setBody('')
@@ -39,27 +40,6 @@ function ReviewForm({arc, addReview, setBtn}){
             }
         })
 
-                 /*// this was added right at the end of this project, #combonumber7fromMacDonals
-                    console.log(cake)
-                        setUser({
-                        ...user, cakes: [...user.cakes, cake]
-                        })
-            //////////////////////////////////////*
-             } else {
-                const errorList = data.errors.map((e) => (
-                    <div key={e}>
-                        <ul style={{color:"red"}} >{e}</ul>
-                    {arc.id ? "" :  
-                        <div>
-                            <button  className="button"> Click here to SignIn and make a comment </button> 
-                            <button  className="button"> Already have an account? Click here</button> 
-                        </div>
-                    }
-                    </div>
-                 ))
-                 setErrors(errorList)
-             }
-        }) */
     }
 
     return(

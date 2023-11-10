@@ -58,7 +58,11 @@ function UserProvider( { children } ){
         .then(data => {
             setReviews([...reviews, data])
         })
-    } */
+    } 
+    */
+    /*const revContext = (data) =>{
+        setReviews([...reviews, data])
+    }*/
 
     const login = (user) => {
         setUser(user)
