@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-    skip_before_action :authorize, only: [:index, :show]
 
     def index
         reviews = Review.all 
@@ -13,13 +12,21 @@ class ReviewsController < ApplicationController
 
     def create
         review = @current_user.reviews.create(review_params)
+        if review.valid?
         render json: review, status: :created
+        else
+            render json: { error: review.errors.full_messages}, status: :unprocessable_entity
+        end
     end
 
     def update
         review = find_user_review
         review.update(review_params)
+        if review.valid?
         render json: review
+        else
+            render json: { error: review.errors.full_messages}, status: :unprocessable_entity
+        end
     end
 
     def destroy

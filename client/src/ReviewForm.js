@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-//import { useContext } from "react";
+//qimport { useContext } from "react";
 //import { UserContext } from "./Context/user";
 
 function ReviewForm({arc, addReview, setBtn}){
 
     const [body, setBody] = useState("")
-    const [errors, setErrors] = useState([])
+    const [ errorsList, setErrorsList ] = useState([])
 
     
-   // const {revContext} = useContext(UserContext)
+    //const { user, setUser } = useContext(UserContext)
     
     function handleSubmit(e) {
         e.preventDefault();
@@ -25,17 +25,18 @@ function ReviewForm({arc, addReview, setBtn}){
         .then((res) => {
             if (res.ok){
                 res.json().then((rev) => {
-                    //revContext(rev)
+                    
                     addReview(rev)
+                    
                     console.log(rev)
                     setBody('')
                     setBtn(false)
                 })
             } else {
                 res.json().then((err) => {
-                    setErrors([err.error])
+                    setErrorsList(err.error)
                     console.log(err)
-                    console.log(errors)
+                    console.log(errorsList)
                 })
             }
         })
@@ -46,13 +47,17 @@ function ReviewForm({arc, addReview, setBtn}){
         <div>
             
             <form onSubmit={handleSubmit}>
-                <input required type= "text" id= "review" value={body} onChange={(e) => setBody(e.target.value)} placeholder="Review"/>
+                <input type= "text" id= "review" value={body} onChange={(e) => setBody(e.target.value)} placeholder="Review"/>
                 <button type="submit" className="button"> Add Review </button>
             </form>
 
-            {errors}
+            {errorsList ? errorsList.map((e) => (
+                        <ul key={e} style={{color: "red"}}>{e}</ul>))
+                      : null}
         </div>
     )  
 }
 
 export default ReviewForm
+
+//make error handle

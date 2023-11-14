@@ -11,7 +11,7 @@ function ArcadeForm({ addArc }){
     const [numOfGames, setNumOfGames] = useState(0)
    
     const navigate = useNavigate()
-    const [errors, setErrors] = useState([])
+    const [errorsList, setErrorsList] = useState([])
     
     if (loggedIn) {
         
@@ -28,8 +28,8 @@ function ArcadeForm({ addArc }){
                      method: "POST",
                      headers: {
                         "Content-Type": "application/json"
-                        },
-                     body: JSON.stringify(arcData)
+                    },
+                    body: JSON.stringify(arcData),
                  })
                  .then((res) => {
                     if (res.ok){
@@ -40,9 +40,9 @@ function ArcadeForm({ addArc }){
                         })
                     } else {
                         res.json().then((err) => {
-                            setErrors([err.errors])
+                            setErrorsList(err.errors)
                             console.log(err)
-                            console.log(errors)
+                            console.log(errorsList)
                         })
                     }
                 })
@@ -55,13 +55,14 @@ function ArcadeForm({ addArc }){
             <div>
                 <form onSubmit={handleArcSubmit}>
                     <h1> Add an Arcade!</h1>
-                        <input required type= "text" id= "name" value={arcName} onChange={(e) => setArcName(e.target.value)} placeholder="Arcade name"/>
-                        <input required type= "text" id="arcade_url" value={arcImgUrl} onChange={(e) => setArcImgUrl(e.target.value)} placeholder="URL for arcade"/>
-                        <input required type= "number" id="num_of_games" value={numOfGames} onChange={(e) => setNumOfGames(e.target.value)} placeholder="Number of games"/>
+                        <input type= "text" id= "name" value={arcName} onChange={(e) => setArcName(e.target.value)} placeholder="Arcade name"/>
+                        <input type= "text" id="arcade_url" value={arcImgUrl} onChange={(e) => setArcImgUrl(e.target.value)} placeholder="URL for arcade"/>
+                        <label> Number of Games</label>
+                        <input type= "number" id="num_of_games" value={numOfGames} onChange={(e) => setNumOfGames(e.target.value)} placeholder="Number of games"/>
                     <button type="submit"> Add Arcade </button>
                 </form>
     
-                {errors ? errors.map((e) => (
+                {errorsList ? errorsList.map((e) => (
                             <ul key={e} style={{color: "red"}}>{e}</ul>))
                           : null}
             </div>

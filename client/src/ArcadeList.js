@@ -5,23 +5,24 @@ import { UserContext } from "./Context/user";
 
 function ArcadeList({arcades, addReview, update, del}){
     
-    let displayArcadeCards= arcades.map( arc => {
-        return(
-           <ArcadeCard key={arc.id} arc={arc} del={del} addReview={addReview} update={update}/>
-        )
-    })
-
+    
+    
     const {loggedIn} = useContext(UserContext)
-    if (!loggedIn) {
+    if (loggedIn) {
+        let displayArcadeCards= arcades.map( arc => {
+            return(
+               <ArcadeCard key={arc.id} arc={arc} del={del} addReview={addReview} update={update}/>
+            )
+        })
         return( 
             <div>
-                <h1> please login or signup to use features</h1>
+                {displayArcadeCards}
             </div>  
-        );
+        )
     } else {  
         return(
             <div>
-                {displayArcadeCards}
+                <h1> please login or signup to use features</h1>
             </div>
             )
     }    

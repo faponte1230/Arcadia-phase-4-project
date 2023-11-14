@@ -34,10 +34,6 @@ function NavBar(){
                     <button className="button"> Arcades </button>
                 </Link>
 
-                <Link to='/reviews'>
-                    <button className="button"> Reviews </button>
-                </Link>
-
                 <Link to='/addarcade'>
                     <button className="button"> Add Arcade </button>
                 </Link>

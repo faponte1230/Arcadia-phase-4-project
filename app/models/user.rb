@@ -3,5 +3,5 @@ class User < ApplicationRecord
     has_many :reviews
     has_many :arcades, through: :reviews 
     
-    validates :username, :password, :password_confirmation, presence: true
+    validates :username, presence: true
 end

@@ -1,5 +1,5 @@
 class ArcadesController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show]
+  #skip_before_action :authorize, only: [:index, :show]
 
   def index
     arcades = Arcade.all  
@@ -8,7 +8,12 @@ class ArcadesController < ApplicationController
 
   def create
     arcade = Arcade.create(arcade_params)
+    if arcade.valid?
     render json: arcade, status: :created
+  else
+      render json: { errors: user.errors.full_messages}, status: :unprocessable_entity
+  end
+    
   end
 
   def show

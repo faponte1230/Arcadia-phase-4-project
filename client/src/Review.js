@@ -6,13 +6,15 @@ function Review({rev, del, update}){
 
     const [updateRevBtn, setUpdateRevBtn] = useState(false)
     
-    const {user} = useContext(UserContext)
+    const {user,  setUser} = useContext(UserContext)
 
     function handleDelete(){
         fetch(`/reviews/${rev.id}`, {
             method: "DELETE" ,
         })
         del(rev)
+        const updateUserRev = user.reviews.filter((r) => r.id !== rev.id)
+        setUser({...user, reviews: updateUserRev})
         console.log(user)
     }
     

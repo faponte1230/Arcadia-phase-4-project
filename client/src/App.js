@@ -1,27 +1,23 @@
-import { React, useEffect, useState } from 'react';
+import { React } from 'react';
 import './App.css';
 import ArcadeForm from './ArcadeForm';
 import Header from './Header';
 import NavBar from './NavBar';
 import Home from './Home'
-import { UserProvider } from './Context/user' 
+//import { UserProvider } from './Context/user' 
 import { Route, Routes } from 'react-router-dom'
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import ArcadeList from './ArcadeList';
-import ReviewsPage from './ReviewsPage';
-
+import { useContext } from 'react';
+import { UserContext } from './Context/user';
 
 function App() {
   //set Arcade state
-  const [arcades, setArcades] = useState([]);
+//  const [arcades, setArcades] = useState([]);
+  const { user, setUser , arcades, setArcades} = useContext(UserContext)
 
-  
-  useEffect(() =>{
-    fetch("/arcades")
-    .then((res) => res.json())
-    .then((arcData) => setArcades(arcData))
-  }, [])
+ 
   
   //Add Arcade
   function addArc(newArc){
@@ -39,6 +35,8 @@ function App() {
       }
     )
     setArcades(arcUpdate)
+    setUser({...user, arcades:[ ...user.reviews, newReview]}) 
+  
   }
 
   //Update Review
@@ -53,15 +51,15 @@ function App() {
       }
     });
 
-   const updatedArcades = arcades.map((arc) => {
+    const updatedArcades = arcades.map((arc) => {
       if(arc.id === updatedReview.arcade_id){
         return {...arc, reviews:updatedArcReviews}
         }else{
         return arc;
       }
-     }
-    )
+    })
     setArcades(updatedArcades)
+    
   }
 
   //Delete Review
@@ -84,7 +82,7 @@ function App() {
 
   return (
     <div className="home">
-      <UserProvider>
+      
      
         <Header />
         <NavBar />
@@ -94,10 +92,9 @@ function App() {
           <Route exact path='/login' element={<LoginForm />} />
           <Route exact path='/arcades' element={<ArcadeList  arcades={arcades} addArc={addArc} addReview={addReview} del={deleteReview} update={updateReview} />} />
           <Route exact path='/addarcade' element={<ArcadeForm addArc={addArc}/>}/>
-          <Route exact path='/reviews' element={<ReviewsPage/>} />
         </Routes>
     
-      </UserProvider>
+      
 
     </div>
   );

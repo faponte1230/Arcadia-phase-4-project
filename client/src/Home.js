@@ -9,23 +9,23 @@ function Home(){
 
     if (loggedIn) {
         
-        const revArr = user.reviews
-        console.log(revArr)
+        const userArr = user.arcades
+        console.log(userArr)
     
-        const showRevs = revArr.map(e => <li key={e.id}>{e.body}</li>)
+        const showArcadeArr = userArr.map(e => <li key={e.id}>{e.name}</li>)
         //console.log(showRevs)
 
         
         return( 
             <div>
                 <h2> Welcome {user.username}! </h2>
-                <p> Click on the Arcades button to navigate and view current arcades! </p>
+                <p> Click on the Arcades button above to navigate and view current arcades! </p>
                 <br/>
                 <br/>
-                <h3>Your Reviews:
+                <h3>Your Reviewed Arcades:
                     <br/>
                     <br/>
-                   {showRevs}
+                   <ul>{showArcadeArr}</ul>
                 </h3>
                
             </div>

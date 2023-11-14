@@ -5,7 +5,7 @@ const UserContext = React.createContext();
 function UserProvider( { children } ){
     const [ user, setUser] = useState({})
     const [loggedIn, setLoggedIn] = useState(false)
-    const [reviews, setReviews] = useState([])
+    const [arcades, setArcades] = useState([])
 
     useEffect(() => {
         fetch('/me')
@@ -13,8 +13,9 @@ function UserProvider( { children } ){
           if (r.ok){
             r.json().then((user) => {
                 setUser(user)
+                console.log(user)
                 setLoggedIn(true)
-                fetchReviews()
+                fetchArcs()
             })
           }
           else {
@@ -38,7 +39,16 @@ function UserProvider( { children } ){
             }
         })
     }, []) */
-           
+    const fetchArcs = () => {
+        fetch("/arcades")
+        .then((res) => res.json())
+        .then((arcData) => {
+            setArcades(arcData)
+            console.log(arcData)
+        })
+    }
+
+    /*
     const fetchReviews = () => {
         fetch('/reviews')
         .then(res => res.json())
@@ -46,7 +56,7 @@ function UserProvider( { children } ){
             console.log(data)
             setReviews(data)
         })
-    } 
+    } */
 
     /*const addReview = (newReview) => {
         fetch('/reviews',{
@@ -66,23 +76,23 @@ function UserProvider( { children } ){
 
     const login = (user) => {
         setUser(user)
-        fetchReviews()
+        fetchArcs()
         setLoggedIn(true)
     }
     
     const logout = () => {
         setUser({})
-        setReviews([])
+        setArcades([])
         setLoggedIn(false)
     }
     
     const signup = (user) => {
         setUser(user)
-        fetchReviews()
+        fetchArcs()
         setLoggedIn(true)
     }
     return(
-        <UserContext.Provider value={ {user, reviews, login, logout, signup, loggedIn, setUser}}>
+        <UserContext.Provider value={ {user, arcades, setArcades, login, logout, signup, loggedIn, setUser}}>
             {children}
         </UserContext.Provider>
 
