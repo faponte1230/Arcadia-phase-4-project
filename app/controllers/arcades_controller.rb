@@ -11,7 +11,7 @@ class ArcadesController < ApplicationController
     if arcade.valid?
     render json: arcade, status: :created
   else
-      render json: { errors: user.errors.full_messages}, status: :unprocessable_entity
+      render json: { errors: arcade.errors.full_messages}, status: :unprocessable_entity
   end
     
   end

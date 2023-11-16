@@ -15,7 +15,7 @@ import { UserContext } from './Context/user';
 function App() {
   //set Arcade state
 //  const [arcades, setArcades] = useState([]);
-  const { user, setUser , arcades, setArcades} = useContext(UserContext)
+  const { arcades, setArcades} = useContext(UserContext)
 
  
   
@@ -35,7 +35,7 @@ function App() {
       }
     )
     setArcades(arcUpdate)
-    setUser({...user, arcades:[ ...user.reviews, newReview]}) 
+    //setUser({...user, arcades:[ ...user.reviews, newReview]}) 
   
   }
 

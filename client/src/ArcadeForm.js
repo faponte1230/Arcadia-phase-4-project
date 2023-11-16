@@ -29,7 +29,7 @@ function ArcadeForm({ addArc }){
                      headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(arcData),
+                    body: JSON.stringify(arcData)
                  })
                  .then((res) => {
                     if (res.ok){
@@ -63,8 +63,8 @@ function ArcadeForm({ addArc }){
                 </form>
     
                 {errorsList ? errorsList.map((e) => (
-                            <ul key={e} style={{color: "red"}}>{e}</ul>))
-                          : null}
+                        <ul key={e} style={{color: "red"}}>{e}</ul>))
+                      : null}
             </div>
         )
     } else {
